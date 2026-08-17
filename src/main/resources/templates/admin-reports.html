@@ -38,7 +38,8 @@
                 <label class="form-label">End Date</label>
                 <input type="date" class="form-control" id="endDate" required>
             </div>
-            <div class="col-md-4 d-flex align-items-end gap-2">
+            <div class="col-md-4 d-flex align-items-end gap-2 flex-wrap">
+                <button type="button" class="btn btn-primary" onclick="viewReport()">View Report</button>
                 <button type="button" class="btn btn-success" onclick="downloadReport('excel')">Export Excel</button>
                 <button type="button" class="btn btn-danger" onclick="downloadReport('pdf')">Export PDF</button>
             </div>
@@ -60,6 +61,16 @@
             return;
         }
         window.location.href = `/admin/reports/bookings/${type}?startDate=${start}&endDate=${end}`;
+    }
+
+    function viewReport() {
+        const start = document.getElementById('startDate').value;
+        const end = document.getElementById('endDate').value;
+        if (!start || !end) {
+            alert('Please select both start and end dates.');
+            return;
+        }
+        window.open(`/admin/reports/bookings/view?startDate=${start}&endDate=${end}`, '_blank');
     }
 </script>
 

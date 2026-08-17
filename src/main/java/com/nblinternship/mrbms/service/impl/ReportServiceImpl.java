@@ -168,4 +168,46 @@ public class ReportServiceImpl implements ReportService {
         workbook.write(response.getOutputStream());
         workbook.close();
     }
+
+
+    @Override
+    public void viewBookingsPdf(HttpServletResponse response, LocalDate startDate, LocalDate endDate) throws IOException {
+        List<Booking> bookings = bookingRepository.findAllWithDetails().stream()
+                .filter(b -> !b.getBookingDate().isBefore(startDate) && !b.getBookingDate().isAfter(endDate))
+                .sorted((a, b) -> a.getBookingId().compareTo(b.getBookingId()))
+                .collect(Collectors.toList());
+
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "inline; filename=bookings-report.pdf");
+
+        PdfWriter writer = new PdfWriter(response.getOutputStream());
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
+
+        document.add(new Paragraph("MRBMS Booking Report").setBold().setFontSize(16));
+        document.add(new Paragraph("Period: " + startDate + " to " + endDate).setFontSize(10));
+        document.add(new Paragraph(" "));
+
+        com.itextpdf.kernel.colors.Color headerBg = new com.itextpdf.kernel.colors.DeviceRgb(13, 110, 253);
+
+        Table table = new Table(6);
+        String[] headers = {"Title", "Room", "Booked By", "Date", "Time", "Status"};
+        for (String h : headers) {
+            table.addHeaderCell(new Cell().add(new Paragraph(h).setBold()
+                            .setFontColor(com.itextpdf.kernel.colors.ColorConstants.WHITE))
+                    .setBackgroundColor(headerBg));
+        }
+
+        for (Booking b : bookings) {
+            table.addCell(b.getMeetingTitle());
+            table.addCell(b.getRoom().getRoomName());
+            table.addCell(b.getUser().getName());
+            table.addCell(b.getBookingDate().toString());
+            table.addCell(b.getStartTime() + " - " + b.getEndTime());
+            table.addCell(b.getStatus());
+        }
+
+        document.add(table);
+        document.close();
+    }
 }

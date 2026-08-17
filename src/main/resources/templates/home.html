@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRBMS - Meeting Room Booking Management System</title>
+    <title>NBL MeetHub - Meeting Room Booking Management System</title>
 
     <!-- ----------Bootstrap 5 CSS---------- -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
@@ -17,7 +17,7 @@
 <!-- ----------Navbar---------- -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/">MRBMS</a>
+        <a class="navbar-brand fw-bold" th:href="@{/}">NBL MeetHub</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
                 aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,8 +35,8 @@
             </ul>
 
             <div class="d-flex gap-2">
-                <a href="/login" class="btn btn-outline-primary">Login</a>
-                <a href="/register" class="btn btn-primary">Sign Up</a>
+                <a th:href="@{/login}" class="btn btn-outline-primary">Login</a>
+                <a th:href="@{/register}" class="btn btn-primary">Sign Up</a>
             </div>
         </div>
     </div>
@@ -57,14 +57,14 @@
                     every meeting room from one centralized platform.
                 </p>
                 <div class="d-flex gap-3">
-                    <a href="/register" class="btn btn-primary btn-lg">Get Started</a>
-                    <a href="/login" class="btn btn-outline-primary btn-lg">Login</a>
+                    <a th:href="@{/register}" class="btn btn-primary btn-lg">Get Started</a>
+                    <a th:href="@{/login}" class="btn btn-outline-primary btn-lg">Login</a>
                 </div>
             </div>
 
             <!-- Right: Image placeholder -->
             <div class="col-lg-6" data-aos="fade-left">
-                <img src="../static/images/meeting1.png" alt="Meeting room booking illustration" class="img-fluid">
+                <img th:src="@{/images/meeting1.png}" alt="Meeting room booking illustration" class="img-fluid">
             </div>
 
         </div>
@@ -164,14 +164,14 @@
         <div class="row align-items-center gy-3">
 
             <div class="col-md-6 text-center text-md-start">
-                <h5 class="fw-bold mb-1">MRBMS</h5>
+                <h5 class="fw-bold mb-1">NBL MeetHub</h5>
                 <p class="text-secondary small mb-0">Meeting Room Booking Management System v1.0</p>
             </div>
 
             <div class="col-md-6 text-center text-md-end">
                 <a href="#home" class="text-light text-decoration-none me-3">Home</a>
                 <a href="#features" class="text-light text-decoration-none me-3">Features</a>
-                <a href="/login" class="text-light text-decoration-none">Login</a>
+                <a th:href="@{/login}" class="text-light text-decoration-none">Login</a>
             </div>
 
         </div>
@@ -179,7 +179,7 @@
         <hr class="border-secondary my-3">
 
         <p class="text-center text-secondary small mb-0">
-            &copy; 2026 MRBMS. All rights reserved.
+            &copy; 2026 NBL MeetHub. All rights reserved.
         </p>
     </div>
 </footer>
@@ -195,7 +195,7 @@
     });
 </script>
 
-<script src="../static/js/script.js"></script>
+<script th:src="@{/js/script.js}"></script>
 
 </body>
 </html>

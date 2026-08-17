@@ -8,4 +8,6 @@ public interface ReportService {
     void exportBookingsExcel(HttpServletResponse response, LocalDate startDate, LocalDate endDate) throws IOException;
     void exportBookingsPdf(HttpServletResponse response, LocalDate startDate, LocalDate endDate) throws IOException;
     void exportRoomUtilizationExcel(HttpServletResponse response) throws IOException;
+
+    void viewBookingsPdf(HttpServletResponse response, LocalDate startDate, LocalDate endDate) throws IOException;
 }
